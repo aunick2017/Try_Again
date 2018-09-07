@@ -15,17 +15,28 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...) (SHOWES US WHERE)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'nguyennick32@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Nick <nguyennick32@email.com>'
+ADMINS = (
+    ('Nick', 'nguyennick32@gmail.com'),
+)
+MANAGERS = ADMINS
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'w67f+2=_9&q0+2qqbofedy!^@-rlw$76t*e2y%4n#cuvbq2pd$'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'w67f+2=_9&q0+2qqbofedy!^@-rlw$76t*e2y%4n#cuvbq2pd$')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ALLOWED_HOSTS =  ['website-try.herokuapp.com', '.website-try.com']
 
 
 # Application definition
@@ -141,3 +152,8 @@ CSRF_COOKIE_SECURE              = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS  = True
 SECURE_HSTS_SECONDS             = 1000000
 SECURE_FRAME_DENY               = True
+
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
+DATABASES['default']['CONN_MAX_AGE'] = 500

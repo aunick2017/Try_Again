@@ -24,13 +24,11 @@ class Post(models.Model):
 	print5 = models.CharField(max_length=120, default ='')
 	id_of_people = models.CharField(max_length=120, default ='')
 
-
 	def __str__(self):
 		return self.Location
 	
 	def get_absolute_url(self):
 		return reverse("posts:detail", kwargs={"id": self.id})
-
 
 
 import json
@@ -54,4 +52,3 @@ class MyModel(models.Model):
     wage = models.FloatField()
 
     objects = DataFrameManager()
-	
